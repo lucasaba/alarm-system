@@ -28,12 +28,6 @@ class ZoneSession
         }
         return static::$zoneSession;
     }
-//    public function isUserLoggedIn(User $user)
-//    {
-//        throw new DependentClassCalledDuringUnitTestException(
-//            'UserSession.isUserLoggedIn() should not be called in an unit test'
-//        );
-//    }
 
     public function getTriggeringZone()
     {
