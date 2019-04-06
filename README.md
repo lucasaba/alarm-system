@@ -1,4 +1,4 @@
-# PUG Cagliari - AlarmSystem Kata
+# AlarmSystem - Refactoring legacy code
 
 Un esercizio per vedere come riscrivere codice legacy senza "rompere" la compatibilità
 e applicando dei buoni principi di programmazione.
