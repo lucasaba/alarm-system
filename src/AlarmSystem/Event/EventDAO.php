@@ -17,7 +17,7 @@ class EventDAO
     public static function findEventsByZone(Zone $zone)
     {
         throw new DependentClassCalledDuringUnitTestException(
-            'TripDAO should not be invoked on an unit test.'
+            'EventDAO should not be invoked on an unit test.'
         );
 
         return null;
