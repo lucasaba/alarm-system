@@ -29,7 +29,7 @@ class ZoneSession
         return static::$zoneSession;
     }
 
-    public function getTriggeringZone()
+    public function getLastTriggeringZone()
     {
         throw new DependentClassCalledDuringUnitTestException(
             'ZoneSession.getTriggeringZone() should not be called in an unit test'

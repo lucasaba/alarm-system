@@ -14,7 +14,7 @@ di zone e di eventi.
 
 Per evitare i falsi positivi, il nostro impianto antifurto non emette allarme a
 meno che non ci siano già stati eventi nelle zone collegate a quella in cui è stato
-scatenato l'evento. 
+scatenato l'ultimo evento. 
 
 Il servizio che dobbiamo correggere è proprio quello che viene interrogato per
 sapere se esistono zone collegate in cui sono scattati eventi.

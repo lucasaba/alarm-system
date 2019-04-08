@@ -16,25 +16,23 @@ use App\AlarmSystem\Zone\ZoneSession;
 class EventService
 {
     /**
-     * Can be called only if a related zone has triggered an event
-     *
      * @param Zone $zone
      * @return array
      * @throws \Exception
      */
-    public function getEventsByZone(Zone $zone) {
+    public function getEventsFormRelatedZoneOf(Zone $zone) {
         $eventList = array();
-        $triggeringZone = ZoneSession::getInstance()->getTriggeringZone();
+        $lastTriggeringZone = ZoneSession::getInstance()->getLastTriggeringZone();
         $isRelated = false;
-        if ($triggeringZone != null) {
+        if ($lastTriggeringZone != null) {
             foreach ($zone->getRelatedZones() as $relatedZone) {
-                if ($relatedZone == $triggeringZone) {
+                if ($relatedZone == $lastTriggeringZone) {
                     $isRelated = true;
                     break;
                 }
             }
             if ($isRelated) {
-                $eventList = EventDAO::findEventsByZone($zone);
+                $eventList = EventDAO::findEventsByZone($lastTriggeringZone);
             }
             return $eventList;
         } else {
