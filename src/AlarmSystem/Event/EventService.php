@@ -16,6 +16,8 @@ use App\AlarmSystem\Zone\ZoneSession;
 class EventService
 {
     /**
+     * Il servizio prende come argomento la zona in cui si è scatenato l'ultimo evento.
+     *
      * @param Zone $zone
      * @return array
      * @throws \Exception

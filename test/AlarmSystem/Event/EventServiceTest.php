@@ -8,7 +8,6 @@
 
 namespace App\Test\AlarmSystem\Event;
 
-use App\AlarmSystem\Event\EventService;
 use PHPUnit\Framework\TestCase;
 
 class EventServiceTest extends TestCase
