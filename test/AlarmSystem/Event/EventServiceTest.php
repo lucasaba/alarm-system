@@ -8,6 +8,7 @@
 
 namespace App\Test\AlarmSystem\Event;
 
+use App\AlarmSystem\Event\Event;
 use App\AlarmSystem\Event\EventService;
 use App\AlarmSystem\Exception\NoTriggeringZoneException;
 use App\AlarmSystem\Zone\Zone;
@@ -33,6 +34,20 @@ class EventServiceTest extends TestCase
         $service = new TestableEventService();
         $service->pretendLastTriggeringZoneIs(new Zone('Cucina'));
         $this->assertCount(0, $service->getEventsFormRelatedZoneOf(new Zone('Bagno')));
+    }
+
+    /**
+     * @test
+     */
+    public function should_return_empty_array_if_triggering_zone_is_not_related_but_there_are_realted_zone_with_events()
+    {
+        $service = new TestableEventService();
+        $service->pretendLastTriggeringZoneIs(new Zone('Cucina'));
+        $bagno = new Zone('Bagno');
+        $relatedZone = new Zone('Corridoio');
+        $relatedZone->addEvent(new Event());
+        $bagno->addRelatedZone($relatedZone);
+        $this->assertCount(0, $service->getEventsFormRelatedZoneOf($bagno));
     }
 }
 
