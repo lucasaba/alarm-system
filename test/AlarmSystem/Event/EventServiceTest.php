@@ -20,13 +20,7 @@ class EventServiceTest extends TestCase
      */
     public function should_throw_an_exception_if_no_last_triggering_zone_is_in_session()
     {
-        $service = new class extends EventService {
-            protected function getLastTriggeringZone()
-            {
-                return null;
-            }
-
-        };
+        $service = new TestableEventService();
         $this->expectException(NoTriggeringZoneException::class);
         $service->getEventsFormRelatedZoneOf(new Zone('Bagno'));
     }
@@ -36,13 +30,23 @@ class EventServiceTest extends TestCase
      */
     public function should_return_empty_array_if_triggering_zone_is_not_related()
     {
-        $service = new class extends EventService {
-            protected function getLastTriggeringZone()
-            {
-                return new Zone('Cucina');
-            }
-
-        };
+        $service = new TestableEventService();
+        $service->pretendLastTriggeringZoneIs(new Zone('Cucina'));
         $this->assertCount(0, $service->getEventsFormRelatedZoneOf(new Zone('Bagno')));
+    }
+}
+
+class TestableEventService extends EventService
+{
+    private $lastTriggeringZone = null;
+
+    public function pretendLastTriggeringZoneIs(Zone $zone)
+    {
+        $this->lastTriggeringZone = $zone;
+    }
+
+    protected function getLastTriggeringZone()
+    {
+        return $this->lastTriggeringZone;
     }
 }
