@@ -25,14 +25,8 @@ class EventService
     public function getEventsFormRelatedZoneOf(Zone $zone) {
         $eventList = array();
         $lastTriggeringZone = $this->getLastTriggeringZone();
-        $isRelated = false;
         if ($lastTriggeringZone != null) {
-            foreach ($zone->getRelatedZones() as $relatedZone) {
-                if ($relatedZone == $lastTriggeringZone) {
-                    $isRelated = true;
-                    break;
-                }
-            }
+            $isRelated = $zone->isRelatedTo($lastTriggeringZone);
             if ($isRelated) {
                 $eventList = $this->getEventsByZone($lastTriggeringZone);
             }

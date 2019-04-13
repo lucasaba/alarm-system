@@ -39,4 +39,8 @@ class Zone
     {
         $this->events[] = $event;
     }
+    public function isRelatedTo(Zone $zone)
+    {
+        return in_array($zone, $this->related_zones);
+    }
 }
