@@ -23,17 +23,16 @@ class EventService
      * @throws \Exception
      */
     public function getEventsFormRelatedZoneOf(Zone $zone) {
-        $eventList = array();
         $lastTriggeringZone = $this->getLastTriggeringZone();
         if ($lastTriggeringZone == null) {
             throw new NoTriggeringZoneException();
         }
 
-        $isRelated = $zone->isRelatedTo($lastTriggeringZone);
-        if ($isRelated) {
-            $eventList = $this->getEventsByZone($lastTriggeringZone);
+        if ($zone->isRelatedTo($lastTriggeringZone)) {
+            return $this->getEventsByZone($lastTriggeringZone);
+        } else {
+            return array();
         }
-        return $eventList;
     }
 
     protected function getLastTriggeringZone()
