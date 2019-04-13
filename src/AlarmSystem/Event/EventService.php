@@ -24,7 +24,7 @@ class EventService
      */
     public function getEventsFormRelatedZoneOf(Zone $zone) {
         $eventList = array();
-        $lastTriggeringZone = ZoneSession::getInstance()->getLastTriggeringZone();
+        $lastTriggeringZone = $this->getLastTriggeringZone();
         $isRelated = false;
         if ($lastTriggeringZone != null) {
             foreach ($zone->getRelatedZones() as $relatedZone) {
@@ -40,5 +40,10 @@ class EventService
         } else {
             throw new NoTriggeringZoneException();
         }
+    }
+
+    protected function getLastTriggeringZone()
+    {
+        return ZoneSession::getInstance()->getLastTriggeringZone();
     }
 }

@@ -8,6 +8,9 @@
 
 namespace App\Test\AlarmSystem\Event;
 
+use App\AlarmSystem\Event\EventService;
+use App\AlarmSystem\Exception\NoTriggeringZoneException;
+use App\AlarmSystem\Zone\Zone;
 use PHPUnit\Framework\TestCase;
 
 class EventServiceTest extends TestCase
@@ -15,8 +18,16 @@ class EventServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_does_something()
+    public function should_throw_an_exception_if_no_last_triggering_zone_is_in_session()
     {
-        $this->fail('This test has not been implemented yet.');
+        $service = new class extends EventService {
+            protected function getLastTriggeringZone()
+            {
+                return null;
+            }
+
+        };
+        $this->expectException(NoTriggeringZoneException::class);
+        $service->getEventsFormRelatedZoneOf(new Zone('Bagno'));
     }
 }
