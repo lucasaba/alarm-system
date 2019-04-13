@@ -30,4 +30,19 @@ class EventServiceTest extends TestCase
         $this->expectException(NoTriggeringZoneException::class);
         $service->getEventsFormRelatedZoneOf(new Zone('Bagno'));
     }
+
+    /**
+     * @test
+     */
+    public function should_return_empty_array_if_triggering_zone_is_not_related()
+    {
+        $service = new class extends EventService {
+            protected function getLastTriggeringZone()
+            {
+                return new Zone('Cucina');
+            }
+
+        };
+        $this->assertCount(0, $service->getEventsFormRelatedZoneOf(new Zone('Bagno')));
+    }
 }
