@@ -34,7 +34,7 @@ class EventService
                 }
             }
             if ($isRelated) {
-                $eventList = EventDAO::findEventsByZone($lastTriggeringZone);
+                $eventList = $this->getEventsByZone($lastTriggeringZone);
             }
             return $eventList;
         } else {
@@ -45,5 +45,10 @@ class EventService
     protected function getLastTriggeringZone()
     {
         return ZoneSession::getInstance()->getLastTriggeringZone();
+    }
+
+    protected function getEventsByZone($lastTriggeringZone)
+    {
+        return EventDAO::findEventsByZone($lastTriggeringZone);
     }
 }

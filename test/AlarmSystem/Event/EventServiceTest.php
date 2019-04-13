@@ -49,6 +49,28 @@ class EventServiceTest extends TestCase
         $bagno->addRelatedZone($relatedZone);
         $this->assertCount(0, $service->getEventsFormRelatedZoneOf($bagno));
     }
+
+    /**
+     * @test
+     */
+    public function should_return_last_triggering_zone_events_if_zone_is_related()
+    {
+        $service = new TestableEventService();
+
+        $cuina = new Zone('Cucina');
+        $cuina->addEvent(new Event());
+
+        $balcone = new Zone('Balcone');
+        $balcone->addEvent(new Event());
+        $balcone->addEvent(new Event());
+        $service->pretendLastTriggeringZoneIs($balcone);
+
+        $camera = new Zone('Camera');
+        $camera->addRelatedZone($balcone);
+
+        $prova =  $service->getEventsFormRelatedZoneOf($camera);
+        $this->assertCount(2, $prova);
+    }
 }
 
 class TestableEventService extends EventService
@@ -58,6 +80,11 @@ class TestableEventService extends EventService
     public function pretendLastTriggeringZoneIs(Zone $zone)
     {
         $this->lastTriggeringZone = $zone;
+    }
+
+    public function getEventsByZone($lastTriggeringZone)
+    {
+        return $lastTriggeringZone->getEvents();
     }
 
     protected function getLastTriggeringZone()
