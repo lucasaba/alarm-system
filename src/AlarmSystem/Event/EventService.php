@@ -28,11 +28,9 @@ class EventService
             throw new NoTriggeringZoneException();
         }
 
-        if ($zone->isRelatedTo($lastTriggeringZone)) {
-            return $this->getEventsByZone($lastTriggeringZone);
-        } else {
-            return array();
-        }
+        return ($zone->isRelatedTo($lastTriggeringZone))
+            ? $this->getEventsByZone($lastTriggeringZone)
+            : array();
     }
 
     protected function getLastTriggeringZone()
