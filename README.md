@@ -1,5 +1,8 @@
 # AlarmSystem - Refactoring legacy code
 
+Questa moficia è un test per dimostrare
+il funzionamento del flow di github
+
 Un esercizio per vedere come riscrivere codice legacy senza "rompere" la compatibilità
 e applicando dei buoni principi di programmazione.
 
@@ -25,3 +28,4 @@ sapere se esistono zone collegate in cui sono scattati eventi.
 https://www.youtube.com/watch?v=_NnElPO5BU0
 
 https://www.youtube.com/watch?v=92Vn9WeaiLA
+
