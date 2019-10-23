@@ -1,5 +1,8 @@
 # AlarmSystem - Refactoring legacy code
 
+Questa moficia è un test per dimostrare
+il funzionamento del flow di github
+
 Un esercizio per vedere come riscrivere codice legacy senza "rompere" la compatibilità
 e applicando dei buoni principi di programmazione.
 
